@@ -1,8 +1,6 @@
-import java.util.*;
-public class Vector {
-	protected double y;
-	protected double x;
-	protected double z;
+
+public class Vector extends Point{
+
 	//constructors
 	public Vector() {
 		x=0;
@@ -13,6 +11,11 @@ public class Vector {
 		this.x=x;
 		this.y=y;
 		this.z=z;
+	}
+	public Vector(Point p){
+		this.x=p.x;
+		this.y=p.y;
+		this.z=p.z;
 	}
 	//getters
 	public double getX() {
@@ -34,11 +37,11 @@ public class Vector {
 	public void setZ(double z) {
 		this.z = z;
 	}
-	private String print() {
+	protected String print() {
 		return "<"+x+","+y+","+z+">";
 	}
 	//addition
-	private Vector addition(Vector a) {
+	public Vector addition(Vector a) {
 		x=this.x+a.getX();
 		y=this.y+a.getY();
 		z=this.z+a.getZ();
@@ -46,11 +49,11 @@ public class Vector {
 		return add;
 	}
 	//dot product
-	private double dot(Vector a) {
+	public double dot(Vector a) {
 		return this.x*a.getX()+this.y*a.getY()+this.z+a.getZ();
 	}
 	//cross product
-	private Vector cross(Vector a) {
+	public Vector cross(Vector a) {
 		x=this.y*a.z-this.z*a.y;
 		y=this.x*a.z-this.z*a.x;
 		z=this.x*a.y-this.y*a.x;
@@ -58,14 +61,15 @@ public class Vector {
 		return cross;
 	}
 	//vector length
-	private double length() {
+	public double length() {
 		return Math.sqrt((Math.pow(x, 2)+Math.pow(y, 2)+Math.pow(z, 2)));
 	}
 	//unit vector
-	private Vector unit() {
-		double a=x/this.length();
-		double b=y/this.length();
-		double c=z/this.length();
+	public Vector unit() {
+		double l=this.length();
+		double a=x/l;
+		double b=y/l;
+		double c=z/l;
 		Vector unit=new Vector(a,b,c);
 		return unit;
 	}
